@@ -483,13 +483,13 @@ contact blocks of `domains.create`.
 | `CreateWithContext(ctx, details)` | Add a new address-book entry |
 | `UpdateWithContext(ctx, addressID, details)` | Update an existing entry |
 | `DeleteWithContext(ctx, addressID)` | Delete an entry |
-| `GetInfoWithContext(ctx, addressID)` | Get the full stored address |
+| `GetInfoWithContext(ctx, addressID)` | Get the full stored address; `addressID` is an `AddressID` built with `NewAddressID` (0 is a valid id) |
 | `GetListWithContext(ctx)` | List every entry (id + name) |
 | `SetDefaultWithContext(ctx, addressID)` | Mark an entry as the account default |
 
 ```go
 // Reuse a stored address as a domains.create contact block.
-info, err := client.UsersAddress.GetInfoWithContext(ctx, 777)
+info, err := client.UsersAddress.GetInfoWithContext(ctx, namecheap.NewAddressID(777))
 if err != nil {
     log.Fatal(err)
 }

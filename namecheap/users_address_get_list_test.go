@@ -13,7 +13,7 @@ const addressGetListResponse = `<?xml version="1.0" encoding="utf-8"?>
 	<Errors />
 	<CommandResponse Type="namecheap.users.address.getList">
 		<AddressGetListResult>
-			<List AddressId="777" AddressName="Home" />
+			<List AddressId="777" AddressName="Home" IsDefault="true" />
 			<List AddressId="778" AddressName="Office" />
 			<List AddressId="779" AddressName="Billing" />
 		</AddressGetListResult>
@@ -37,6 +37,9 @@ func TestUsersAddressService_GetList(t *testing.T) {
 		mustLen(t, entries, 3)
 		assert.Equal(t, 777, *entries[0].AddressID)
 		assert.Equal(t, "Home", *entries[0].AddressName)
+		mustNotNil(t, entries[0].IsDefault)
+		assert.True(t, *entries[0].IsDefault)
+		assert.Nil(t, entries[1].IsDefault)
 		assert.Equal(t, 779, *entries[2].AddressID)
 		assert.Equal(t, "Billing", *entries[2].AddressName)
 	})

@@ -3,7 +3,7 @@
 	<Errors />
 	<CommandResponse Type="namecheap.users.address.getList">
 		<AddressGetListResult>
-			<List AddressId="777" AddressName="Home" />
+			<List AddressId="777" AddressName="Home" IsDefault="true" />
 			<List AddressId="778" AddressName="Office" />
 			<List AddressId="779" AddressName="Billing" />
 		</AddressGetListResult>

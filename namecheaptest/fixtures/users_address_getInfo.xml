@@ -5,7 +5,7 @@
 		<GetAddressInfoResult>
 			<AddressId>777</AddressId>
 			<AddressName>Home</AddressName>
-			<DefaultYN>0</DefaultYN>
+			<Default_YN>false</Default_YN>
 			<EmailAddress>john@example.com</EmailAddress>
 			<FirstName>John</FirstName>
 			<LastName>Smith</LastName>

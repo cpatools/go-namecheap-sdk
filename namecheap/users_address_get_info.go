@@ -33,7 +33,9 @@ type UsersAddressGetInfoResult struct {
 	// AddressName is the address label.
 	AddressName *string `xml:"AddressName"`
 	// DefaultYN reports whether this is the default address.
-	DefaultYN *bool `xml:"DefaultYN"`
+	// The API names the response element Default_YN, unlike the DefaultYN request
+	// parameter of address.create and address.update.
+	DefaultYN *bool `xml:"Default_YN"`
 	// EmailAddress is the contact e-mail address.
 	EmailAddress *string `xml:"EmailAddress"`
 	// FirstName is the contact's first name.
@@ -68,17 +70,18 @@ type UsersAddressGetInfoResult struct {
 
 // GetInfoWithContext returns the full stored address for the given id.
 //
-// It is a read-only, idempotent call. addressID must be positive.
+// It is a read-only, idempotent call. addressID must be set with NewAddressID
+// and must not be negative; 0 is a valid id.
 //
 // Namecheap doc: https://www.namecheap.com/support/api/methods/users/address/get-info/
-func (uas *UsersAddressService) GetInfoWithContext(ctx context.Context, addressID int) (*UsersAddressGetInfoCommandResponse, error) {
-	if addressID <= 0 {
+func (uas *UsersAddressService) GetInfoWithContext(ctx context.Context, addressID AddressID) (*UsersAddressGetInfoCommandResponse, error) {
+	if !addressID.IsSet() || addressID.Int() < 0 {
 		return nil, &InvalidArgumentsError{Fields: []string{"AddressId"}}
 	}
 
 	params := map[string]string{
 		"Command":   "namecheap.users.address.getInfo",
-		"AddressId": strconv.Itoa(addressID),
+		"AddressId": strconv.Itoa(addressID.Int()),
 	}
 
 	var response UsersAddressGetInfoResponse

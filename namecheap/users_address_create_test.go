@@ -28,7 +28,7 @@ const addressGetInfoResponse = `<?xml version="1.0" encoding="utf-8"?>
 		<GetAddressInfoResult>
 			<AddressId>777</AddressId>
 			<AddressName>Home</AddressName>
-			<DefaultYN>0</DefaultYN>
+			<Default_YN>false</Default_YN>
 			<EmailAddress>john@example.com</EmailAddress>
 			<FirstName>John</FirstName>
 			<LastName>Smith</LastName>
@@ -141,7 +141,7 @@ func TestUsersAddressService_CreateThenGetInfoEquality(t *testing.T) {
 	mustNoError(t, err)
 	addressID := *createResp.AddressCreateResult.AddressID
 
-	infoResp, err := client.UsersAddress.GetInfoWithContext(context.Background(), addressID)
+	infoResp, err := client.UsersAddress.GetInfoWithContext(context.Background(), NewAddressID(addressID))
 	mustNoError(t, err)
 	got := infoResp.GetAddressInfoResult
 	mustNotNil(t, got)

@@ -33,6 +33,9 @@ type UsersAddressListEntry struct {
 	AddressID *int `xml:"AddressId,attr"`
 	// AddressName is the name of the address profile.
 	AddressName *string `xml:"AddressName,attr"`
+	// IsDefault reports whether this is the default address. It is nil when the
+	// API omits the attribute.
+	IsDefault *bool `xml:"IsDefault,attr"`
 }
 
 // GetListWithContext returns every address-book entry (id and name) on the
